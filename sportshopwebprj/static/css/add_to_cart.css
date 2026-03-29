@@ -1,0 +1,8 @@
+@keyframes highlight-cart {
+    0% { background-color: #fef6f5; }
+    100% { background-color: transparent; }
+}
+
+#mini-cart .header-cart-item:first-child {
+    animation: highlight-cart 2s ease-out;
+}

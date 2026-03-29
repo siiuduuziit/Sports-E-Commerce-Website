@@ -1,0 +1,804 @@
+{% load static %} {% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Account Details</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/icons/favicon.png' %}"
+    />
+    <!--===============================================================================================-->
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'vendor/animate/animate.css' %}" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/animsition/css/animsition.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/select2/select2.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/daterangepicker/daterangepicker.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'vendor/slick/slick.css' %}" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'css/dropdown.css' %}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'css/util.css' %}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'css/account_details.css' %}" />
+    <!--===============================================================================================-->
+  </head>
+  <body class="animsition">
+    <!-- Header -->
+    {% include 'partials/header_products.html' %}
+
+    <!-- breadcrumb -->
+    <div class="container mb-3">
+      <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="{% url 'core:index' %}" class="stext-109 cl8 hov-cl1 trans-04">
+          Home
+          <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4"> Account Details </span>
+      </div>
+    </div>
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section
+      class="section-content padding-y bg-light"
+      style="min-height: 80vh"
+    >
+      <div class="container">
+        <div class="row">
+          <aside class="col-md-3">
+            <div class="card p-2">
+              <ul class="list-group list-group-flush shadow-none">
+                <a class="list-group-item active" data-target="#tab-dashboard">
+                  <i class="fa fa-dashboard m-r-10"></i> Dashboard
+                </a>
+                <a class="list-group-item" data-target="#tab-orders">
+                  <i class="fa fa-shopping-cart m-r-10"></i> Lịch sử đơn hàng
+                </a>
+                <a class="list-group-item" data-target="#tab-addresses">
+                  <i class="fa fa-map-marker m-r-10"></i> Sổ địa chỉ
+                </a>
+                <a class="list-group-item" data-target="#tab-wishlists">
+                  <i class="fa fa-heart m-r-10"></i> Danh sách yêu thích
+                </a>
+                <a class="list-group-item" data-target="#tab-coupons">
+                  <i class="fa fa-gift m-r-10"></i> Đổi mã giảm giá
+                </a>
+                <a class="list-group-item" data-target="#tab-account">
+                  <i class="fa fa-user m-r-10"></i> Thông tin tài khoản
+                </a>
+              </ul>
+              <hr />
+              <a
+                class="btn btn-outline-danger btn-block m-t-10"
+                href="{% url 'userauths:logout_view' %}"
+              >
+                <i class="fa fa-power-off"></i> Đăng xuất
+              </a>
+            </div>
+          </aside>
+
+          <main class="col-md-9">
+            <div id="tab-dashboard" class="tab-section">
+              <div class="card mb-4">
+                <header class="card-header">
+                  <h5 class="mb-0">
+                    Chào mừng,
+                    <span class="text-primary"
+                      >{{ request.user.username|title }}</span
+                    >!
+                  </h5>
+                </header>
+                <div class="card-body p-4 text-center">
+                  <p class="text-muted">
+                    Biểu đồ thống kê hoạt động mua sắm của bạn
+                  </p>
+                  <div style="max-height: 400px">
+                    <canvas id="myChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="tab-orders" class="tab-section" style="display: none">
+              <h4 class="mb-4 mtext-105">Đơn hàng của tôi</h4>
+
+              {% for o in orders %}
+              <article
+                class="card mb-4 overflow-hidden border-0 shadow-sm"
+                style="border-radius: 15px"
+              >
+                <header
+                  class="card-header d-flex justify-content-between align-items-center bg-white p-t-15 p-b-15"
+                >
+                  <div>
+                    <span class="text-muted">Mã đơn hàng:</span>
+                    <strong class="text-dark">#{{ o.id }}</strong>
+                  </div>
+                  <span
+                    class="badge badge-pill p-lr-15 p-tb-5"
+                    style="background: #eef1ff; color: #717fe0"
+                  >
+                    <i class="fa fa-calendar-alt m-r-5"></i> {{ o.order_date|date:'d/m/Y H:i' }}
+                  </span>
+                </header>
+
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-7 border-right">
+                      <h6 class="stext-101 cl2 mb-3">
+                        <i class="fa fa-truck m-r-5 text-primary"></i> Thông tin
+                        giao hàng
+                      </h6>
+
+                      <p class="stext-102 cl6">
+                        <strong>{{ o.full_name|default:user.username }}</strong
+                        ><br />
+
+                        <span class="d-block mt-1">
+                          <i class="fa fa-phone fa-sm text-muted m-r-5"></i>
+                          {{ o.phone_number|default:"Chưa có SĐT" }}
+                        </span>
+
+                        <span class="d-block mt-1">
+                          <i class="fa fa-envelope fa-sm text-muted m-r-5"></i>
+                          {{ o.email|default:user.email }}
+                        </span>
+
+                        <span class="d-block mt-1">
+                          <i
+                            class="fa fa-map-marker fa-sm text-muted m-r-5"
+                          ></i>
+                          {{ o.address_line }}, {{ o.ward_name }}, {{ o.district_name }}, {{ o.province_name }}
+                        </span>
+                      </p>
+                    </div>
+
+                    <div class="col-md-5">
+                      <h6 class="stext-101 cl2 mb-3">
+                        <i class="fa fa-credit-card m-r-5 text-primary"></i>
+                        Thanh toán
+                      </h6>
+
+                      <div class="mb-2">
+                        {% if o.paid_status %}
+                        <span class="badge badge-success"
+                          >Đã thanh toán ({{ o.payment_method }})</span
+                        >
+                        {% else %}
+                        <span class="badge badge-warning"
+                          >Chờ thanh toán ({{ o.payment_method }})</span
+                        >
+                        {% endif %}
+                      </div>
+
+                      <div
+                        class="d-flex justify-content-between mb-1 stext-102"
+                      >
+                        <span>Tổng tiền:</span>
+                        <strong class="cl2"
+                          >{{ o.price|floatformat:0|intcomma }} VND</strong
+                        >
+                      </div>
+
+                      {% if o.saved > 0 %}
+                      <div
+                        class="d-flex justify-content-between mb-2 stext-102"
+                      >
+                        <span>Tiết kiệm:</span>
+                        <span class="text-danger"
+                          >-{{ o.saved|floatformat:0|intcomma }} VND</span
+                        >
+                      </div>
+                      {% endif %}
+
+                      <a
+                        href="{% url 'core:order-details' o.id %}"
+                        class="btn btn-sm btn-outline-primary w-100 mt-2"
+                        style="border-radius: 8px"
+                      >
+                        Chi tiết đơn hàng
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              {% empty %}
+              <div
+                class="text-center p-5 card border-0 shadow-sm"
+                style="border-radius: 15px"
+              >
+                <i class="fa fa-box-open fa-3x text-light mb-3"></i>
+                <p class="stext-115 cl6">Bạn chưa có đơn hàng nào.</p>
+              </div>
+              {% endfor %}
+            </div>
+
+            <div id="tab-addresses" class="tab-section" style="display: none">
+              <div class="row">
+                <div class="col-md-6">
+                  <h5 class="mb-3">Địa chỉ đã lưu</h5>
+                  {% for a in addresses %}
+                  <div
+                    class="card mb-3 address-card {% if a.address_status %}border-primary{% endif %}"
+                    id="address-card-{{ a.id }}"
+                  >
+                    <div class="card-body p-3">
+                      <div
+                        class="d-flex justify-content-between align-items-start"
+                      >
+                        <h6 class="font-weight-bold stext-101">
+                          {{ a.address_name }}
+                        </h6>
+                        <span
+                          class="badge badge-primary status-text {% if not a.address_status %}d-none{% endif %}"
+                        >
+                          Mặc định
+                        </span>
+                      </div>
+                      <p class="stext-102 cl6 mt-2 mb-0">
+                        {{ a.address_line }}
+                      </p>
+                      <p class="stext-102 cl6">{{ a.phone_number }}</p>
+
+                      <button
+                        data-address-id="{{ a.id }}"
+                        data-url="{% url 'core:make-default-address' %}"
+                        class="btn btn-sm btn-link p-0 make-default-address make-default-btn text-primary {% if a.address_status %}d-none{% endif %}"
+                      >
+                        Thiết lập mặc định
+                      </button>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="mb-0">Thêm địa chỉ mới</h5>
+                    </div>
+                    <div class="card-body">
+                      <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <label class="stext-102">Họ tên người nhận</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            placeholder="Nguyễn Văn A"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="stext-102">Số điện thoại</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="phone_number"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="stext-102">Địa chỉ chi tiết</label>
+                          <textarea
+                            class="form-control"
+                            name="address"
+                            rows="3"
+                            placeholder="Số nhà, tên đường, Phường/Xã..."
+                          ></textarea>
+                        </div>
+                        <button
+                          class="btn btn-dark w-100 mt-2 py-2"
+                          type="submit"
+                        >
+                          Lưu địa chỉ
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="tab-wishlists" class="tab-section" style="display: none">
+              <h4 class="mb-4 mtext-105">Sản phẩm yêu thích</h4>
+              {% if wishlists %}
+              <div class="row" id="wishlist-list">
+                {% for w in wishlists %}
+                <div class="col-md-4 mb-4 wishlist-item-{{ w.id }}">
+                  <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                    <div class="position-relative">
+                      <img
+                        src="{{ w.product.image.url }}"
+                        class="card-img-top"
+                        style="height: 200px; object-fit: cover"
+                      />
+                      <button
+                        class="btn btn-sm btn-white position-absolute rounded-circle shadow-sm remove-from-wishlists"
+                        data-id="{{ w.id }}"
+                        data-url="{% url 'core:remove-from-wishlist' %}"
+                        style="
+                          top: 10px;
+                          right: 10px;
+                          width: 35px;
+                          height: 35px;
+                        "
+                      >
+                        <i class="fa fa-times text-danger"></i>
+                      </button>
+                    </div>
+                    <div class="card-body d-flex flex-column p-3">
+                      <h6 class="stext-101 text-truncate">
+                        <a
+                          href="{% url 'core:product-details' w.product.pid %}"
+                          class="cl2 hov-cl1"
+                          >{{ w.product.title }}</a
+                        >
+                      </h6>
+                      <p class="stext-105 cl1 mt-1 font-weight-bold">
+                        {{ w.product.price|floatformat:0|intcomma }} VND
+                      </p>
+                      <!-- <a
+                        href="#"
+                        class="btn btn-sm btn-dark w-100 mt-auto bor-10"
+                        >Thêm vào giỏ</a
+                      > -->
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              {% else %}
+              <div class="text-center p-5 card">
+                <p class="text-muted">Danh sách yêu thích trống.</p>
+              </div>
+              {% endif %}
+            </div>
+
+            <div id="tab-coupons" class="tab-section" style="display: none">
+              <h4 class="mb-4 mtext-105">Kho ưu đãi & Đổi điểm</h4>
+
+              <div
+                class="card mb-4 border-0 shadow-sm"
+                style="
+                  border-radius: 15px;
+                  background: linear-gradient(45deg, #717fe0, #a271e0);
+                "
+              >
+                <div
+                  class="card-body p-4 d-flex justify-content-between align-items-center text-white"
+                >
+                  <div>
+                    <p
+                      class="stext-102 mb-1"
+                      style="color: rgba(255, 255, 255, 0.8)"
+                    >
+                      Điểm tích lũy hiện tại
+                    </p>
+                    <h2 class="mtext-109 text-white">
+                      {{ user.profile.points }}
+                      <span class="stext-101">Điểm</span>
+                    </h2>
+                  </div>
+                  <div class="text-center">
+                    <i class="fa fa-star fa-3x text-warning"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                {% for item in coupon_data %} {% with c=item.coupon %}
+                <div class="col-md-6 mb-4">
+                  <div
+                    class="card h-100 border-0 shadow-sm overflow-hidden"
+                    style="
+                      border-radius: 12px;
+                      border: 1px dashed #717fe0 !important;
+                    "
+                  >
+                    <div class="card-body p-3">
+                      <div class="d-flex align-items-center mb-3">
+                        <div
+                          class="size-103 bg-light flex-c-m m-r-15"
+                          style="border-radius: 10px; min-width: 60px"
+                        >
+                          <i class="fa fa-ticket text-primary fa-lg"></i>
+                        </div>
+                        <div>
+                          <h6 class="stext-101 cl2 mb-0">
+                            Giảm {{ c.discount }}%
+                          </h6>
+                          <p class="stext-102 cl6 mb-0">Mã: {{ c.coupon }}</p>
+                        </div>
+                      </div>
+
+                      <div
+                        class="d-flex justify-content-between align-items-center border-top p-t-10"
+                      >
+                        <span class="stext-105 cl1 font-weight-bold">
+                          {{ c.points_required }} <small>điểm</small>
+                        </span>
+
+                        {% if c.id in user_owned_ids %}
+                        <button
+                          class="btn btn-sm btn-success stext-101 bor-10 p-lr-15"
+                          disabled
+                        >
+                          <i class="fa fa-check m-r-5"></i> Đã sở hữu
+                        </button>
+
+                        {% elif item.can_redeem %}
+                        <form
+                          action="{% url 'core:redeem-coupon' c.id %}"
+                          method="POST"
+                        >
+                          {% csrf_token %}
+                          <button
+                            type="submit"
+                            class="btn btn-sm btn-dark stext-101 bor-10 p-lr-15 hov-btn3 trans-04"
+                          >
+                            Đổi ngay
+                          </button>
+                        </form>
+
+                        {% else %}
+                        <button
+                          class="btn btn-sm btn-secondary stext-101 bor-10 p-lr-15"
+                          disabled
+                          title="Bạn cần thêm {{ item.need_points }} điểm"
+                        >
+                          Chưa đủ điểm
+                        </button>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endwith %} {% empty %}
+                <div class="col-12 text-center p-5">
+                  <p class="stext-115 cl6">
+                    Hiện chưa có mã giảm giá nào để đổi.
+                  </p>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div id="tab-account" class="tab-section" style="display: none">
+              <h4 class="mb-4 mtext-105">Thông tin tài khoản</h4>
+
+              <div class="card border-0 shadow-sm overflow-hidden">
+                <div class="card-body p-0">
+                  <div class="row no-gutters">
+                    <div class="col-md-4 bg-light p-4 text-center border-right">
+                      <div class="position-relative d-inline-block mb-3">
+                        <img
+                          src="https://ui-avatars.com/api/?name={{ request.user.username }}&background=717fe0&color=fff&size=128"
+                          alt="Avatar"
+                          class="rounded-circle shadow-sm border border-white"
+                          style="width: 120px; height: 120px; object-fit: cover"
+                        />
+                      </div>
+                      <h5 class="mtext-101 cl2 mb-1">
+                        {{ request.user.username|title }}
+                      </h5>
+                      <p class="stext-102 cl6 mb-3">
+                        Thành viên từ: {{ request.user.date_joined|date:"M Y" }}
+                      </p>
+                      <span class="badge badge-success p-lr-15 p-tb-4 bor-10"
+                        >Đã xác thực</span
+                      >
+                    </div>
+
+                    <div class="col-md-8 p-4">
+                      <form action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                          <div class="col-md-6 form-group mb-3">
+                            <label class="stext-102 cl2 mb-1"
+                              >Tên đăng nhập</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control bg-light"
+                              value="{{ request.user.username }}"
+                              readonly
+                            />
+                            <small class="text-muted"
+                              >Không thể thay đổi tên đăng nhập</small
+                            >
+                          </div>
+                          <div class="col-md-6 form-group mb-3">
+                            <label class="stext-102 cl2 mb-1">Email</label>
+                            <input
+                              type="email"
+                              name="email"
+                              class="form-control"
+                              value="{{ request.user.email }}"
+                              placeholder="example@gmail.com"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-6 form-group mb-3">
+                            <label class="stext-102 cl2 mb-1">Họ và tên</label>
+                            <input
+                              type="text"
+                              name="full_name"
+                              class="form-control"
+                              value="{{ request.user.full_name }}"
+                              placeholder="Nhập họ tên"
+                            />
+                          </div>
+                          <div class="col-md-6 form-group mb-3">
+                            <label class="stext-102 cl2 mb-1"
+                              >Số điện thoại</label
+                            >
+                            <input
+                              type="text"
+                              name="phone"
+                              class="form-control"
+                              value="{{ request.user.phone_number }}"
+                              placeholder="090xxxxxxx"
+                            />
+                          </div>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <div
+                          class="d-flex justify-content-between align-items-center"
+                        >
+                          <div class="stext-102 cl6">
+                            <i class="fa fa-shield-alt m-r-5 text-success"></i>
+                            Bảo mật tài khoản: <strong>Cao</strong>
+                          </div>
+                          <button
+                            type="submit"
+                            class="flex-c-m stext-101 cl0 size-101 bg3 bor1 hov-btn3 p-lr-15 trans-04"
+                          >
+                            Cập nhật thông tin
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mt-4">
+                <div
+                  class="card-body p-4 d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <h6 class="stext-101 cl2">Mật khẩu</h6>
+                    <p class="stext-102 cl6 mb-0">
+                      Thay đổi mật khẩu định kỳ để bảo vệ tài khoản
+                    </p>
+                  </div>
+                  <a
+                    href="#"
+                    class="btn btn-outline-dark stext-101 bor-10 p-lr-20"
+                    >Đổi mật khẩu</a
+                  >
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= SECTION CONTENT END ========================= -->
+
+    <!-- Chatbot -->
+    {% include 'partials/chatbot.html' %}
+
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/slick/slick.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/slick-custom.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/parallax100/parallax100.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/main.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/make_default_address.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/remove_from_wishlists.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--===============================================================================================-->
+    <script>
+      // Sidebar select2
+      $(".js-select2").each(function () {
+        $(this).select2({
+          minimumResultsForSearch: 20,
+          dropdownParent: $(this).next(".dropDownSelect2"),
+        });
+      });
+
+      // Magnific Popup gallery
+      $(".gallery-lb").each(function () {
+        $(this).magnificPopup({
+          delegate: "a",
+          type: "image",
+          gallery: { enabled: true },
+          mainClass: "mfp-fade",
+        });
+      });
+
+      // Perfect Scrollbar
+      $(".js-pscroll").each(function () {
+        $(this).css({ position: "relative", overflow: "hidden" });
+        var ps = new PerfectScrollbar(this, {
+          wheelSpeed: 1,
+          scrollingThreshold: 1000,
+          wheelPropagation: false,
+        });
+        $(window).on("resize", function () {
+          ps.update();
+        });
+      });
+
+      // Parallax
+      $(".parallax100").parallax100();
+    </script>
+    <!--===============================================================================================-->
+    <script>
+      // Tab switching for sidebar
+      const items = document.querySelectorAll(".list-group-item[data-target]");
+      const sections = document.querySelectorAll(".tab-section");
+
+      items.forEach((item) => {
+        item.addEventListener("click", function () {
+          // Remove active class
+          items.forEach((i) => i.classList.remove("active"));
+          this.classList.add("active");
+
+          // Hide all sections
+          sections.forEach((sec) => (sec.style.display = "none"));
+
+          // Show selected section
+          const target = this.getAttribute("data-target");
+          document.querySelector(target).style.display = "block";
+        });
+      });
+
+      // Default active tab
+      document.querySelector("#tab-dashboard").style.display = "block";
+    </script>
+    <!--===============================================================================================-->
+    <script>
+      // Đợi toàn bộ trang (bao gồm cả hiệu ứng animsition) tải xong
+      window.onload = function () {
+        try {
+          // Sử dụng escapejs để tránh lỗi ký tự đặc biệt trong chuỗi JSON
+          const month_data = JSON.parse("{{ month_json|escapejs }}");
+          const total_orders_data = JSON.parse(
+            "{{ total_orders_json|escapejs }}"
+          );
+
+          const ctx = document.getElementById("myChart");
+
+          if (ctx) {
+            new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: month_data,
+                datasets: [
+                  {
+                    label: "Số lượng đơn hàng",
+                    data: total_orders_data,
+                    backgroundColor: "rgba(113, 127, 224, 0.2)", // Màu tím giống giao diện của bạn
+                    borderColor: "rgba(113, 127, 224, 1)",
+                    borderWidth: 1,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1, // Đảm bảo hiển thị số nguyên cho đơn hàng
+                    },
+                  },
+                },
+              },
+            });
+          }
+        } catch (e) {
+          console.error("Lỗi dữ liệu biểu đồ:", e);
+        }
+      };
+    </script>
+  </body>
+</html>

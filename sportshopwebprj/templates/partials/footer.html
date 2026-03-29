@@ -1,0 +1,136 @@
+{% load static %}
+<footer class="bg3 p-t-75 p-b-32">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-lg-3 p-b-50">
+        <h4 class="stext-301 cl0 p-b-30 border-bottom-footer">Categories</h4>
+        <ul class="p-t-10">
+          {% for c in categories %}
+          <li class="p-b-10 group-link">
+            <a href="#" class="stext-107 cl7 hov-cl1 trans-04 flex-m">
+              <i class="fa fa-angle-right m-r-10 link-icon"></i>
+              {{ c.ctitle }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 p-b-50">
+        <h4 class="stext-301 cl0 p-b-30 border-bottom-footer">Support</h4>
+        <ul class="p-t-10">
+          <li class="p-b-10 group-link">
+            <a href="{% url 'core:account-details' %}" class="stext-107 cl7 hov-cl1 trans-04 flex-m">
+              <i class="fa fa-truck m-r-10 link-icon"></i> Track Order
+            </a>
+          </li>
+          <li class="p-b-10 group-link">
+            <a href="{% url 'core:account-details' %}" class="stext-107 cl7 hov-cl1 trans-04 flex-m">
+              <i class="fa fa-refresh m-r-10 link-icon"></i> Returns
+            </a>
+          </li>
+          <li class="p-b-10 group-link">
+            <a href="{% url 'core:account-details' %}" class="stext-107 cl7 hov-cl1 trans-04 flex-m">
+              <i class="fa fa-shield m-r-10 link-icon"></i> Shipping Policy
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 p-b-50">
+        <h4 class="stext-301 cl0 p-b-30 border-bottom-footer">Contact Us</h4>
+        <div class="p-t-10">
+          <p class="stext-107 cl7 size-201 flex-t">
+            <i class="zmdi zmdi-pin m-r-12 p-t-4 fs-18 cl1"></i>
+            <span>31/1A Nguyễn Bỉnh Khiêm, P. Đa Kao, Q.1, TP. Hồ Chí Minh</span>
+          </p>
+          <p class="stext-107 cl7 size-201 flex-m p-t-12">
+            <i class="zmdi zmdi-phone m-r-12 fs-18 cl1"></i>
+            <span>0368 021 584</span>
+          </p>
+          <p class="stext-107 cl7 size-201 flex-m p-t-12">
+            <i class="zmdi zmdi-email m-r-12 fs-18 cl1"></i>
+            <span>billnguyen234@gmail.com</span>
+          </p>
+
+          <div class="p-t-27">
+            <a href="#" class="fs-20 cl7 hov-cl1 trans-04 m-r-20 social-icon"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="fs-20 cl7 hov-cl1 trans-04 m-r-20 social-icon"><i class="fa fa-instagram"></i></a>
+            <a href="#" class="fs-20 cl7 hov-cl1 trans-04 m-r-20 social-icon"><i class="fa fa-pinterest-p"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3 p-b-50">
+        <h4 class="stext-301 cl0 p-b-30 border-bottom-footer">Newsletter</h4>
+        <form class="p-t-10">
+          <div class="wrap-input1 w-full p-b-4 m-b-20">
+            <input class="input1 bg-none plh1 stext-107 cl7 shadow-none" type="email" name="email" placeholder="email@example.com">
+            <div class="focus-input1 trans-04"></div>
+          </div>
+          <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04 shadow-btn">
+            Subscribe Now
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="p-t-40 border-top-dark">
+      <div class="flex-c-m flex-w p-b-18">
+        <img class="m-all-5 hov-img-scale trans-04" src="{% static 'images/icons/icon-pay-01.png' %}" alt="PAY">
+        <img class="m-all-5 hov-img-scale trans-04" src="{% static 'images/icons/icon-pay-02.png' %}" alt="PAY">
+        <img class="m-all-5 hov-img-scale trans-04" src="{% static 'images/icons/icon-pay-03.png' %}" alt="PAY">
+        <img class="m-all-5 hov-img-scale trans-04" src="{% static 'images/icons/icon-pay-04.png' %}" alt="PAY">
+        <img class="m-all-5 hov-img-scale trans-04" src="{% static 'images/icons/icon-pay-05.png' %}" alt="PAY">
+      </div>
+
+      <p class="stext-107 cl6 txt-center">
+        Copyright &copy; <script>document.write(new Date().getFullYear());</script> 
+        <b>CozaStore</b>. Design by <a href="#" class="cl1 hov-cl1">YourName</a>
+      </p>
+    </div>
+  </div>
+
+  <style>
+    .border-bottom-footer {
+      position: relative;
+      display: inline-block;
+    }
+    .border-bottom-footer::after {
+      content: "";
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #717fe0; /* Màu tím chủ đạo */
+    }
+    .link-icon {
+      font-size: 12px;
+      opacity: 0;
+      transition: all 0.3s;
+      transform: translateX(-10px);
+    }
+    .group-link:hover .link-icon {
+      opacity: 1;
+      transform: translateX(0);
+      color: #717fe0;
+    }
+    .group-link:hover a {
+      padding-left: 5px;
+    }
+    .social-icon:hover {
+      transform: translateY(-5px);
+      display: inline-block;
+    }
+    .border-top-dark {
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hov-img-scale:hover {
+      transform: scale(1.1);
+    }
+    .shadow-btn {
+      box-shadow: 0 4px 15px rgba(113, 127, 224, 0.4);
+    }
+  </style>
+</footer>

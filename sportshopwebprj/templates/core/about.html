@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Về Chúng Tôi | Coza Store</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/icons/favicon.png' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+
+    <style>
+      .about-img-box {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .about-img-box img {
+        transition: transform 0.8s ease;
+      }
+      .about-img-box:hover img {
+        transform: scale(1.05);
+      }
+      .story-text {
+        line-height: 1.8;
+        color: #666;
+        text-align: justify;
+      }
+      .quote-box {
+        border-left: 4px solid #717fe0;
+        padding-left: 20px;
+        font-style: italic;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 0 10px 10px 0;
+        font-family: Poppins-Medium;
+      }
+      .stat-number {
+        display: block;
+        font-weight: bold;
+        color: #717fe0;
+      }
+    </style>
+  </head>
+  <body class="animsition">
+    {% include 'partials/header_products.html' %}
+
+    <section
+      class="bg-img1 txt-center p-lr-15 p-tb-92"
+      style="background-image: url(&quot;{% static 'images/slide-03.jpg' %}&quot;);"
+    >
+      <h2 class="ltext-105 cl0 txt-center shadow-sm text-uppercase">
+        Nâng Tầm Chuyển Động
+      </h2>
+    </section>
+
+    <section class="bg0 p-t-75 p-b-120">
+      <div class="container">
+        <div class="row p-b-148">
+          <div class="col-md-7 col-lg-8">
+            <div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
+              <h3 class="mtext-111 cl2 p-b-16">Hành Trình Chinh Phục Tốc Độ</h3>
+              <p class="stext-113 cl6 p-b-26 story-text">
+                Tại trung tâm Quận 1, <strong>Coza Store</strong> không chỉ đơn
+                thuần là một cửa hàng bán giày. Chúng tôi bắt đầu với niềm đam
+                mê mãnh liệt dành cho văn hóa Sneaker và những bộ môn vận động.
+                Chúng tôi tin rằng một đôi giày tốt sẽ đưa bạn đi xa hơn, và một
+                bộ đồ tập thoải mái sẽ giúp bạn vượt qua mọi giới hạn của bản
+                thân.
+              </p>
+              <p class="stext-113 cl6 p-b-26 story-text">
+                Với trụ sở tại 31/1A Nguyễn Bỉnh Khiêm, mỗi sản phẩm tại shop
+                đều được tuyển chọn kỹ lưỡng về công nghệ đệm, độ bền vật liệu
+                và thiết kế chuẩn thể thao. Từ sân chạy bộ đến phòng gym hay
+                phong cách dạo phố năng động, chúng tôi luôn có giải pháp hoàn
+                hảo cho đôi chân và vóc dáng của bạn.
+              </p>
+              <div class="quote-box m-t-10">
+                "Đừng chỉ dừng lại ở việc tập luyện, hãy tận hưởng nó với sự tự
+                tin cao nhất cùng những trang thiết bị tốt nhất."
+              </div>
+            </div>
+          </div>
+
+          <div class="col-11 col-md-5 col-lg-4 m-lr-auto">
+            <div class="about-img-box">
+              <img
+                src="{% static 'images/sneakers-category.jpg' %}"
+                alt="Giày thể thao cao cấp"
+                class="w-full"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="order-md-2 col-md-7 col-lg-8">
+            <div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
+              <h3 class="mtext-111 cl2 p-b-16">
+                Sứ Mệnh Đồng Hành Cùng Thể Thao Việt
+              </h3>
+              <p class="stext-113 cl6 p-b-26 story-text">
+                Sứ mệnh của Coza Store là mang những dòng giày Performance (hiệu
+                suất cao) và trang phục thể thao công nghệ mới nhất đến gần hơn
+                với cộng đồng tại Phường Đa Kao và toàn quốc. Chúng tôi không
+                ngừng cập nhật các xu hướng từ những giải đấu lớn nhất thế giới
+                để đảm bảo bạn luôn "chất" và mạnh mẽ.
+              </p>
+              <p class="stext-113 cl6 p-b-26 story-text">
+                Chúng tôi cam kết về sự trung thực trong nguồn gốc sản phẩm và
+                dịch vụ tư vấn size chuẩn xác nhất, giúp khách hàng tránh được
+                những chấn thương không đáng có trong quá trình vận động.
+              </p>
+            </div>
+          </div>
+
+          <div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto">
+            <div class="about-img-box">
+              <img
+                src="{% static 'images/soccer-category.jpg' %}"
+                alt="Thời trang thể thao năng động"
+                class="w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray p-t-60 p-b-60" style="background-color: #f7f7f7">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-4 txt-center p-b-30">
+            <span class="ltext-101 stat-number">5.000+</span>
+            <p class="stext-108 cl6 text-uppercase">
+              Đôi giày đã đến tay khách hàng
+            </p>
+          </div>
+          <div class="col-md-4 txt-center p-b-30">
+            <span class="ltext-101 stat-number">50+</span>
+            <p class="stext-108 cl6 text-uppercase">
+              Thương hiệu thể thao uy tín
+            </p>
+          </div>
+          <div class="col-md-4 txt-center p-b-30">
+            <span class="ltext-101 stat-number">100%</span>
+            <p class="stext-108 cl6 text-uppercase">
+              Cam kết chất lượng Performance
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% include 'partials/footer.html' %}
+
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

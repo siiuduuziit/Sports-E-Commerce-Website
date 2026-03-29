@@ -1,0 +1,38 @@
+{% load static %} {% load humanize %}
+
+{% for w in wishlists %}
+<div class="col-md-4 mb-4 wishlist-item-{{ w.id }}">
+  <div class="card h-100 shadow-sm border-0 overflow-hidden">
+    <div class="position-relative">
+      <img
+        src="{{ w.product.image.url }}"
+        class="card-img-top"
+        style="height: 200px; object-fit: cover"
+      />
+      <button
+        class="btn btn-sm btn-white position-absolute rounded-circle shadow-sm remove-from-wishlists"
+        data-id="{{ w.id }}"
+        data-url="{% url 'core:remove-from-wishlist' %}"
+        style="top: 10px; right: 10px; width: 35px; height: 35px"
+      >
+        <i class="fa fa-times text-danger"></i>
+      </button>
+    </div>
+    <div class="card-body d-flex flex-column p-3">
+      <h6 class="stext-101 text-truncate">
+        <a
+          href="{% url 'core:product-details' w.product.pid %}"
+          class="cl2 hov-cl1"
+          >{{ w.product.title }}</a
+        >
+      </h6>
+      <p class="stext-105 cl1 mt-1 font-weight-bold">
+        {{ w.product.price|floatformat:0|intcomma }} VND
+      </p>
+      <a href="#" class="btn btn-sm btn-dark w-100 mt-auto bor-10"
+        >Thêm vào giỏ</a
+      >
+    </div>
+  </div>
+</div>
+{% endfor %}

@@ -1,0 +1,71 @@
+{% load static %} {% load humanize %}
+
+<tr class="table_head bg-light">
+  <th class="column-1 p-l-30">Product</th>
+  <th class="column-2"></th>
+  <th class="column-3 text-center">Price</th>
+  <th class="column-4 text-center">Quantity</th>
+  <th class="column-5 text-center">Update</th>
+  <th class="column-6 text-center">Remove</th>
+</tr>
+
+{% for product_id, item in cart_data.items %}
+<tr class="table_row">
+  <td class="column-1">
+    <div class="how-itemcart1 shadow-sm">
+      <img src="{{ item.image }}" alt="IMG" />
+    </div>
+  </td>
+  <td class="column-2">
+    <a
+      href="{% url 'core:product-details' item.pid %}"
+      class="stext-104 cl2 hov-cl1 trans-04"
+    >
+      {{ item.title }}
+    </a>
+  </td>
+  <td class="column-3 text-center stext-105 cl3">
+    {{ item.price|intcomma }}<small>đ</small>
+  </td>
+  <td class="column-4 text-center">
+    <div class="wrap-num-product flex-w m-l-auto m-r-auto bor8 shadow-sm">
+      <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+        <i class="fs-16 zmdi zmdi-minus"></i>
+      </div>
+
+      <input
+        class="mtext-104 cl3 txt-center num-product product-quantity-{{ product_id }}"
+        type="number"
+        value="{{ item.qty }}"
+        min="1"
+      />
+
+      <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+        <i class="fs-16 zmdi zmdi-plus"></i>
+      </div>
+    </div>
+  </td>
+  <td class="column-5 text-center">
+    <button
+      type="button"
+      class="btn-update-cart update-item hov-cl1 trans-04"
+      data-item="{{ product_id }}"
+      data-url="{% url 'core:update-cart' %}"
+    >
+      <i class="zmdi zmdi-refresh-alt fs-22"></i>
+      <p class="stext-115" style="font-size: 10px">Update</p>
+    </button>
+  </td>
+  <td class="column-6 text-center">
+    <button
+      type="button"
+      class="btn-delete-cart delete-item hov-cl1 trans-04"
+      data-item="{{ product_id }}"
+      data-url="{% url 'core:delete-from-cart' %}"
+    >
+      <i class="zmdi zmdi-delete fs-22 cl1"></i>
+      <p class="stext-115 cl1" style="font-size: 10px">Remove</p>
+    </button>
+  </td>
+</tr>
+{% endfor %}

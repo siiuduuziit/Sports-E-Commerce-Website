@@ -1,0 +1,130 @@
+{% extends "admin/index.html" %}
+{% load humanize %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Tổng đơn hàng</span>
+                    <span class="info-box-number">{{ admin_stats.total_orders }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-bill-alt"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Doanh thu</span>
+                    <span class="info-box-number">{{ admin_stats.total_revenue|floatformat:0|intcomma }} VND</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-hourglass-half"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Chờ xử lý</span>
+                    <span class="info-box-number">{{ admin_stats.order_chart_data.0 }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-check"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Khách hàng</span>
+                    <span class="info-box-number">Mới</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card card-outline card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Cơ cấu đơn hàng</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="adminOrdersChart" style="min-height: 250px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="card card-outline card-success">
+                <div class="card-header border-transparent">
+                    <h3 class="card-title">Đơn hàng mới nhất</h3>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Khách hàng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Tổng tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for o in admin_stats.latest_orders %}
+                                <tr>
+                                    <td><a href="/admin/core/cartorder/{{ o.id }}/change/">#{{ o.id }}</a></td>
+                                    <td>{{ o.full_name|default:"Khách lẻ" }}</td>
+                                    <td>
+                                        {% if o.product_status == "Đang xử lý" %}
+                                            <span class="badge badge-warning">Đang xử lý</span>
+                                        {% elif o.product_status == "Hủy" %}
+                                            <span class="badge badge-danger">Đã hủy</span>
+                                        {% else %}
+                                            <span class="badge badge-success">Thành công</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ o.price|floatformat:0 }}đ</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer clearfix">
+                    <a href="/admin/core/cartorder/" class="btn btn-sm btn-secondary float-right">Xem tất cả đơn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById("adminOrdersChart").getContext("2d");
+        const chartData = JSON.parse("{{ admin_stats.order_chart_data|safe }}");
+
+        new Chart(ctx, {
+            type: "doughnut", // Đổi sang biểu đồ vòng cho hiện đại
+            data: {
+                labels: ["Đang xử lý", "Đã thanh toán", "Hủy"],
+                datasets: [{
+                    data: chartData,
+                    backgroundColor: ["#f39c12", "#28a745", "#dc3545"],
+                    borderWidth: 5,
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                cutout: '70%', // Tạo lỗ hổng giữa vòng tròn cho đẹp
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    });
+</script>
+
+{{ block.super }}
+{% endblock %}

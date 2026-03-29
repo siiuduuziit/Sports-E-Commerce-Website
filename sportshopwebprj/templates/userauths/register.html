@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Đăng ký | Coza Store</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/icons/favicon.png' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}" />
+  </head>
+  <body class="animsition">
+    {% include 'partials/header_index.html' %}
+
+    <div class="container register-container p-t-100 p-b-100">
+      <div class="row justify-content-center w-100">
+        <div class="col-md-7 col-lg-5">
+          <div class="register-card">
+            <div class="register-header">
+              <h3 class="mtext-105">Tạo tài khoản mới</h3>
+              <p class="stext-102">
+                Gia nhập cộng đồng Coza Store ngay hôm nay
+              </p>
+            </div>
+
+            <div class="register-body">
+              <form method="POST" action="{% url 'userauths:register_view' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label class="form-label-custom">Tên đăng nhập</label>
+                  <div class="input-group-custom">
+                    <i class="zmdi zmdi-account"></i>
+                    <input
+                      type="text"
+                      name="username"
+                      placeholder="Nhập tên đăng nhập"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label-custom">Địa chỉ Email</label>
+                  <div class="input-group-custom">
+                    <i class="zmdi zmdi-email"></i>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="example@mail.com"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label-custom">Mật khẩu</label>
+                  <div class="input-group-custom">
+                    <i class="zmdi zmdi-lock"></i>
+                    <input
+                      type="password"
+                      name="password1"
+                      placeholder="Nhập mật khẩu"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label-custom">Xác nhận mật khẩu</label>
+                  <div class="input-group-custom">
+                    <i class="zmdi zmdi-lock-outline"></i>
+                    <input
+                      type="password"
+                      name="password2"
+                      placeholder="Nhập lại mật khẩu"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button type="submit" class="btn-register stext-101">
+                  Đăng ký ngay
+                </button>
+
+                <div class="footer-link">
+                  Đã có tài khoản?
+                  <a href="{% url 'userauths:login_view' %}"
+                    >Đăng nhập tại đây</a
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include 'partials/footer.html' %}
+
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

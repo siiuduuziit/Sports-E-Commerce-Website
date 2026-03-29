@@ -1,0 +1,72 @@
+{% load static %} {% load humanize %}
+
+{% for p in products %}
+<div
+  class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item cat_{{ p.category.cid }}"
+>
+  <div class="block2">
+    <div class="block2-pic hov-img0 pos-relative">
+      <img src="{{ p.image.url }}" alt="{{ p.title }}" />
+
+      {% if p.old_price > p.price %}
+      <div
+        class="block2-label-new stext-103 p-t-4 p-b-4 p-l-10 p-r-10 bg-danger color-white"
+        style="background-color: #e65540"
+      >
+        -{{ p.get_percentage|floatformat:0 }}%
+      </div>
+      {% else %}
+      <div class="block2-label-new stext-103 p-t-4 p-b-4 p-l-10 p-r-10">
+        New
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="block2-txt flex-w flex-t p-t-14">
+      <div class="block2-txt-child1 flex-col-l">
+        <a
+          href="{% url 'core:product-details' p.pid %}"
+          class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 font-weight-bold"
+        >
+          {{ p.title }}
+        </a>
+
+        <div class="flex-w flex-m">
+          <span class="stext-105 cl1" style="font-weight: 600; font-size: 16px">
+            {{ p.price|intcomma }} <small>VND</small>
+          </span>
+
+          {% if p.old_price > p.price %}
+          <span
+            class="stext-109 cl3 m-l-10"
+            style="text-decoration: line-through; font-size: 13px"
+          >
+            {{ p.old_price|intcomma }}
+          </span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="block2-txt-child2 flex-r p-t-3">
+        <a
+          href="#"
+          class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 add-to-wishlist"
+          data-url="{% url 'core:add-to-wishlist' %}"
+          data-product-item="{{ p.id }}"
+        >
+          <img
+            class="icon-heart1 trans-04 {% if p.id in wishlist_ids %}dis-none{% else %}dis-block{% endif %}"
+            src="{% static 'images/icons/icon-heart-01.png' %}"
+            alt="ICON"
+          />
+          <img
+            class="icon-heart2 trans-04 ab-t-l {% if p.id in wishlist_ids %}dis-block{% else %}dis-none{% endif %}"
+            src="{% static 'images/icons/icon-heart-02.png' %}"
+            alt="ICON"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

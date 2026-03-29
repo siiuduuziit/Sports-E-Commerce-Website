@@ -1,0 +1,648 @@
+{% load static %} {% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shoping Cart</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/icons/favicon.png' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/animate/animate.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/animsition/css/animsition.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/select2/select2.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'css/dropdown.css' %}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    <!--===============================================================================================-->
+  </head>
+  <body class="animsition">
+    <!-- Header -->
+    {% include 'partials/header_products.html' %}
+
+    <!-- breadcrumb -->
+    <div class="container">
+      <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="{% url 'core:index' %}" class="stext-109 cl8 hov-cl1 trans-04">
+          Home
+          <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a
+          href="{% url 'core:shopping-cart' %}"
+          class="stext-109 cl8 hov-cl1 trans-04"
+        >
+          Shopping Cart
+          <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4"> Checkout </span>
+      </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <form
+      id="checkout-form"
+      class="bg0 p-t-75 p-b-85"
+      method="POST"
+      action="{% url 'core:checkout' %}"
+    >
+      {% csrf_token %}
+      <div class="container">
+        <div class="row">
+          <!-- Billing Details -->
+          <div class="col-lg-7 col-xl-6 m-lr-auto m-b-50">
+            <div class="bor10 p-lr-40 p-t-30 p-b-40 m-lr-0-xl p-lr-15-sm">
+              <h4 class="mtext-109 cl2 p-b-30">Thông Tin Khách Hàng</h4>
+              <div class="form-group">
+                <label class="stext-111 cl2">Họ Tên</label>
+                <input
+                  class="form-control stext-111 cl2 p-lr-15"
+                  type="text"
+                  name="full_name"
+                  placeholder="Full Name"
+                  value="{{ active_address.address_name }}"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="stext-111 cl2">Email</label>
+                <input
+                  class="form-control stext-111 cl2 p-lr-15"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="stext-111 cl2">Tỉnh/Thành phố</label>
+                <select id="province" class="form-control">
+                  <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="stext-111 cl2">Quận/Huyện</label>
+                <select id="district" class="form-control" disabled>
+                  <option value="">-- Chọn Quận/Huyện --</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="stext-111 cl2">Phường/Xã</label>
+                <select id="ward" class="form-control" disabled>
+                  <option value="">-- Chọn Phường/Xã --</option>
+                </select>
+              </div>
+
+              <input type="hidden" name="province_name" id="province_name" />
+              <input type="hidden" name="district_name" id="district_name" />
+              <input type="hidden" name="ward_name" id="ward_name" />
+
+              <div class="form-group">
+                <label class="stext-111 cl2">Địa chỉ</label>
+                <input
+                  class="form-control stext-111 cl2 p-lr-15"
+                  type="text"
+                  name="address_line"
+                  placeholder="Address"
+                  value="{{ active_address.address_line }}"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="stext-111 cl2">Điện Thoại</label>
+                <input
+                  class="form-control stext-111 cl2 p-lr-15"
+                  type="text"
+                  name="phone_number"
+                  placeholder="Phone Number"
+                  value="{{ active_address.phone_number }}"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="stext-111 cl2">Lưu Ý</label>
+                <input
+                  class="form-control stext-111 cl2 p-lr-15"
+                  type="text"
+                  name="notes"
+                  placeholder="Notes"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Order Summary -->
+          <div class="col-lg-5 col-xl-4 m-lr-auto m-b-50">
+            <div
+              class="bor10 p-lr-40 p-t-30 p-b-40 m-lr-0-xl p-lr-15-sm bg-white shadow-sm"
+            >
+              <h4 class="mtext-109 cl2 p-b-25 border-bottom">
+                <i class="zmdi zmdi-receipt m-r-10"></i> Đơn Hàng Của Bạn
+              </h4>
+
+              <ul
+                class="header-cart-wrapitem w-full p-t-15"
+                style="max-height: 280px; overflow-y: auto"
+              >
+                {% for product_id, item in cart_data.items %}
+                <li
+                  class="header-cart-item flex-w flex-t m-b-15 p-b-10"
+                  style="border-bottom: 1px dashed #f1f1f1"
+                >
+                  <div
+                    class="header-cart-item-img shadow-sm"
+                    style="width: 60px"
+                  >
+                    <img
+                      src="{{ item.image }}"
+                      alt="IMG"
+                      style="border-radius: 5px"
+                    />
+                  </div>
+
+                  <div
+                    class="header-cart-item-txt p-t-2"
+                    style="width: calc(100% - 70px)"
+                  >
+                    <a
+                      href="{% url 'core:product-details' item.pid %}"
+                      class="header-cart-item-name m-b-5 hov-cl1 trans-04 stext-101"
+                    >
+                      {{ item.title }}
+                    </a>
+                    <div class="flex-w flex-sb-m">
+                      <span class="header-cart-item-info cl6 stext-102">
+                        {{ item.qty }} x
+                        <span class="cl2"
+                          >{{ item.price|floatformat:0|intcomma }}</span
+                        >
+                      </span>
+                      <span class="stext-102 cl2 font-weight-bold">VND</span>
+                    </div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+
+              <div class="p-t-20 p-b-25">
+                <div class="flex-w flex-t p-b-10">
+                  <div class="size-208">
+                    <span class="stext-110 cl2">Tạm tính:</span>
+                  </div>
+                  <div class="size-209 text-right">
+                    <span class="mtext-110 cl2"
+                      >{{ cart_sub_total_amount|floatformat:0|intcomma }}
+                      VND</span
+                    >
+                  </div>
+                </div>
+
+                <div class="flex-w flex-t p-b-10">
+                  <div class="size-208">
+                    <span class="stext-110 cl11" style="color: #e91e63"
+                      >Giảm giá:</span
+                    >
+                  </div>
+                  <div class="size-209 text-right">
+                    <span class="mtext-110 cl11" style="color: #e91e63"
+                      >- {{ discount|floatformat:0|intcomma }} VND</span
+                    >
+                  </div>
+                </div>
+
+                <div class="flex-w flex-t p-t-15 border-top m-t-10">
+                  <div class="size-208">
+                    <span class="mtext-101 cl2">Tổng cộng:</span>
+                  </div>
+                  <div class="size-209 text-right p-t-1">
+                    <span
+                      class="mtext-110 cl1"
+                      style="font-size: 24px; font-weight: 700; color: #333"
+                    >
+                      {{ cart_total_amount|floatformat:0|intcomma }}
+                      <small style="font-size: 14px">VND</small>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex-w flex-m m-b-30">
+                <div
+                  class="bor13 size-117 m-r-10 m-b-10"
+                  style="width: calc(100% - 110px)"
+                >
+                  <input
+                    class="stext-104 cl2 plh4 size-117 p-lr-20"
+                    type="text"
+                    id="coupon_text"
+                    placeholder="Mã giảm giá..."
+                  />
+                </div>
+                <button
+                  type="button"
+                  id="apply-coupon-btn"
+                  class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 trans-04 m-b-10"
+                  style="min-width: 100px"
+                >
+                  Áp dụng
+                </button>
+              </div>
+
+              <input type="hidden" name="action" id="checkout-action" />
+              <input type="hidden" name="coupon_code" id="coupon_code_input" />
+
+              <div class="flex-col-l">
+                <button
+                  type="submit"
+                  onclick="document.getElementById('checkout-action').value='cod'"
+                  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 m-b-12 shadow-sm"
+                >
+                  <i class="zmdi zmdi-truck m-r-10"></i> THANH TOÁN KHI NHẬN
+                  HÀNG
+                </button>
+
+                <button
+                  type="button"
+                  id="bankTransferBtn"
+                  class="flex-c-m stext-101 cl0 size-116 bg1 bor14 hov-btn1 p-lr-15 trans-04 shadow-sm"
+                  style="background-color: #0056b3"
+                >
+                  <i class="zmdi zmdi-balance m-r-10"></i> CHUYỂN KHOẢN NGÂN
+                  HÀNG
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="bankTransferModal"
+            class="modal"
+            style="
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 0, 0, 0.8);
+              z-index: 9999;
+            "
+          >
+            <div
+              class="modal-content"
+              style="
+                background: #fff;
+                margin: 5vh auto;
+                padding: 25px;
+                width: 95%;
+                max-width: 420px;
+                text-align: center;
+                border-radius: 12px;
+                position: relative;
+              "
+            >
+              <span
+                class="close-btn"
+                style="
+                  position: absolute;
+                  top: 10px;
+                  right: 20px;
+                  cursor: pointer;
+                  font-size: 30px;
+                  color: #999;
+                "
+                >&times;</span
+              >
+
+              <h3 class="mtext-105 cl2 p-b-10">Thanh Toán Chuyển Khoản</h3>
+              <p class="stext-102 cl6 p-b-15">
+                Vui lòng quét mã QR hoặc chuyển khoản chính xác nội dung bên
+                dưới
+              </p>
+
+              <div
+                class="p-all-10 bor10 m-b-20 bg-white shadow-sm d-inline-block"
+              >
+                <img
+                  id="bankQrImage"
+                  src=""
+                  width="280"
+                  alt="QR Code"
+                  style="display: block; margin: 0 auto"
+                />
+              </div>
+
+              <div
+                class="text-left bg-light p-all-15 bor13 m-b-20 stext-102"
+                style="background-color: #f8f9fa"
+              >
+                <div class="p-b-5">Chủ TK: <b>HUYNH NGUYEN</b></div>
+                <div class="p-b-5">
+                  Số TK: <b class="cl1" style="font-size: 16px">1028841469</b>
+                </div>
+                <div>
+                  Nội dung:
+                  <b class="text-danger"
+                    >Thanh toán đơn hàng #{{ order.id|default:"" }}</b
+                  >
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                onclick="document.getElementById('checkout-action').value='bank'"
+                class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04"
+              >
+                Xác nhận đã chuyển khoản
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Chatbot -->
+    {% include 'partials/chatbot.html' %}
+
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+
+    <!-- Back to top -->
+    <div class="btn-back-to-top" id="myBtn">
+      <span class="symbol-btn-back-to-top">
+        <i class="zmdi zmdi-chevron-up"></i>
+      </span>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script>
+      $(".js-select2").each(function () {
+        $(this).select2({
+          minimumResultsForSearch: 20,
+          dropdownParent: $(this).next(".dropDownSelect2"),
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script>
+      $(".js-pscroll").each(function () {
+        $(this).css("position", "relative");
+        $(this).css("overflow", "hidden");
+        var ps = new PerfectScrollbar(this, {
+          wheelSpeed: 1,
+          scrollingThreshold: 1000,
+          wheelPropagation: false,
+        });
+
+        $(window).on("resize", function () {
+          ps.update();
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/main.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <!--===============================================================================================-->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const btn = document.getElementById("bankTransferBtn");
+        const modal = document.getElementById("bankTransferModal");
+        const closeBtn = modal.querySelector(".close-btn");
+        const qrImg = document.getElementById("bankQrImage");
+        const confirmBtn = document.getElementById("confirmBankPayment");
+        const form = document.getElementById("checkout-form");
+
+        // Mở modal
+        btn.addEventListener("click", function () {
+          let amount = "{{ cart_total_amount_int }}";
+          qrImg.src = `https://api.vietqr.io/image/970436-1028841469-uS6go1R.jpg?accountName=HUYNH%20NGUYEN&amount=${amount}`;
+          modal.style.display = "block";
+        });
+
+        // Đóng modal
+        closeBtn.onclick = () => (modal.style.display = "none");
+        window.onclick = (e) => {
+          if (e.target === modal) modal.style.display = "none";
+        };
+
+        // XÁC NHẬN ĐÃ CHUYỂN → SUBMIT
+        confirmBtn.addEventListener("click", function () {
+          document.getElementById("checkout-action").value = "bank";
+          form.submit();
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("https://provinces.open-api.vn/api/p/")
+          .then((res) => res.json())
+          .then((data) => {
+            const provinceSelect = document.getElementById("province");
+
+            data.forEach((province) => {
+              const option = document.createElement("option");
+              option.value = province.code;
+              option.textContent = province.name;
+              provinceSelect.appendChild(option);
+            });
+          });
+      });
+    </script>
+
+    <script>
+      document
+        .getElementById("province")
+        .addEventListener("change", function () {
+          const provinceCode = this.value;
+          const districtSelect = document.getElementById("district");
+          const wardSelect = document.getElementById("ward");
+
+          districtSelect.innerHTML =
+            '<option value="">-- Chọn Quận/Huyện --</option>';
+          wardSelect.innerHTML =
+            '<option value="">-- Chọn Phường/Xã --</option>';
+
+          wardSelect.disabled = true;
+
+          if (!provinceCode) {
+            districtSelect.disabled = true;
+            return;
+          }
+
+          fetch(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`)
+            .then((res) => res.json())
+            .then((data) => {
+              districtSelect.disabled = false;
+
+              data.districts.forEach((district) => {
+                const option = document.createElement("option");
+                option.value = district.code;
+                option.textContent = district.name;
+                districtSelect.appendChild(option);
+              });
+            });
+        });
+    </script>
+
+    <script>
+      document
+        .getElementById("district")
+        .addEventListener("change", function () {
+          const districtCode = this.value;
+          const wardSelect = document.getElementById("ward");
+
+          wardSelect.innerHTML =
+            '<option value="">-- Chọn Phường/Xã --</option>';
+
+          if (!districtCode) {
+            wardSelect.disabled = true;
+            return;
+          }
+
+          fetch(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`)
+            .then((res) => res.json())
+            .then((data) => {
+              wardSelect.disabled = false;
+
+              data.wards.forEach((ward) => {
+                const option = document.createElement("option");
+                option.value = ward.code;
+                option.textContent = ward.name;
+                wardSelect.appendChild(option);
+              });
+            });
+        });
+    </script>
+
+    <script>
+      const provinceSelect = document.getElementById("province");
+      const districtSelect = document.getElementById("district");
+      const wardSelect = document.getElementById("ward");
+
+      const provinceNameInput = document.getElementById("province_name");
+      const districtNameInput = document.getElementById("district_name");
+      const wardNameInput = document.getElementById("ward_name");
+
+      // Gán tên Tỉnh khi chọn
+      provinceSelect.addEventListener("change", function () {
+        if (this.selectedIndex > 0) {
+          provinceNameInput.value = this.options[this.selectedIndex].text;
+        } else {
+          provinceNameInput.value = "";
+        }
+      });
+
+      // Gán tên Quận khi chọn
+      districtSelect.addEventListener("change", function () {
+        if (this.selectedIndex > 0) {
+          districtNameInput.value = this.options[this.selectedIndex].text;
+        } else {
+          districtNameInput.value = "";
+        }
+      });
+
+      // Gán tên Phường khi chọn
+      wardSelect.addEventListener("change", function () {
+        if (this.selectedIndex > 0) {
+          wardNameInput.value = this.options[this.selectedIndex].text;
+        } else {
+          wardNameInput.value = "";
+        }
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script>
+      document.getElementById("apply-coupon-btn").onclick = function () {
+        // Chỉ chọn đúng cái form có id là checkout-form
+        const form = document.getElementById("checkout-form");
+
+        document.getElementById("checkout-action").value = "coupon";
+        document.getElementById("coupon_code_input").value =
+          document.getElementById("coupon_text").value;
+
+        // Nộp đúng form checkout
+        form.submit();
+      };
+    </script>
+  </body>
+</html>

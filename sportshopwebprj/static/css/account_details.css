@@ -1,0 +1,44 @@
+.list-group-item {
+  border: none;
+  padding: 12px 20px;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-weight: 500;
+  color: #555;
+}
+.list-group-item:hover {
+  background-color: #f8f9fa;
+  color: #717fe0; /* Màu chủ đạo CozaStore */
+  padding-left: 25px;
+}
+.list-group-item.active {
+  background-color: #717fe0 !important;
+  border-color: #717fe0 !important;
+  border-radius: 8px !important;
+}
+.card {
+  border: none;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+}
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 15px 25px;
+  border-radius: 12px 12px 0 0 !important;
+}
+.btn-primary {
+  background-color: #717fe0;
+  border-color: #717fe0;
+}
+.btn-primary:hover {
+  background-color: #5a67d8;
+  border-color: #5a67d8;
+}
+
+/* Hiệu ứng cho wishlist card */
+.wishlist-item:hover .card {
+  transform: translateY(-5px);
+  transition: 0.3s;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}

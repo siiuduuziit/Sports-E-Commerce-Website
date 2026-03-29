@@ -1,0 +1,21 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/chatbot.css' %}" />
+
+<div id="chat-icon">💬</div>
+
+<div id="chat-box">
+  <div class="chat-header">
+    <span>Chat bot hỗ trợ</span>
+    <button id="close-chat">✖</button>
+  </div>
+
+  <div id="chat-messages"></div>
+
+  <div class="chat-input">
+    <input id="chat-input" placeholder="Nhập câu hỏi..." />
+    <button id="send-btn" type="button">Gửi</button>
+  </div>
+</div>
+
+<script src="{% static 'js/chatbot.js' %}"></script>

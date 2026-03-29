@@ -1,0 +1,533 @@
+{% load static %} {% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Product</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/icons/favicon.png' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/animate/animate.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/animsition/css/animsition.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/select2/select2.min.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/daterangepicker/daterangepicker.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/slick/slick.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}"
+    />
+    <!--===============================================================================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'css/dropdown.css' %}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="{% static 'css/filter.css' %}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    <!--===============================================================================================-->
+  </head>
+  <body class="animsition">
+    {% include 'partials/header_products.html' %}
+
+    <div class="wrap-header-cart js-panel-cart">
+      <div class="s-full js-hide-cart"></div>
+
+      <div class="header-cart flex-col-l p-l-65 p-r-25">
+        <div class="header-cart-title flex-w flex-sb-m p-b-8">
+          <span class="mtext-103 cl2"> Your Cart </span>
+          <div
+            class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart"
+          >
+            <i class="zmdi zmdi-close"></i>
+          </div>
+        </div>
+
+        <div class="header-cart-content flex-w js-pscroll">
+          <ul class="header-cart-wrapitem w-full">
+            {% for product_id, item in cart_data.items %}
+            <li class="header-cart-item flex-w flex-t m-b-12">
+              <div class="header-cart-item-img">
+                <img src="{{ item.image }}" alt="IMG" />
+              </div>
+
+              <div class="header-cart-item-txt p-t-8">
+                <a
+                  href="{% url 'core:product-details' item.pid %}"
+                  class="header-cart-item-name m-b-10 hov-cl1 trans-04"
+                >
+                  {{ item.title }}
+                </a>
+                <span class="header-cart-item-info">
+                  {{ item.qty }} x
+                  <b class="cl1">{{ item.price|intcomma }} VND</b>
+                </span>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+
+          <div class="w-full">
+            <div class="header-cart-total w-full p-tb-40">
+              Total:
+              <span class="cl1"
+                >{{ cart_total_amount|floatformat:0|intcomma }} VND</span
+              >
+            </div>
+
+            <div class="header-cart-buttons flex-w w-full">
+              <a
+                href="{% url 'core:shopping-cart' %}"
+                class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10"
+              >
+                View Cart
+              </a>
+              <a
+                href="{% url 'core:checkout' %}"
+                class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"
+              >
+                Check Out
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg0 m-t-23 p-b-140">
+      <div class="container">
+        <div class="flex-w flex-sb-m p-b-52">
+          <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+            <button
+              class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
+              data-filter="*"
+            >
+              All Products
+            </button>
+
+            {% for c in categories %}
+            <button
+              class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+              data-filter=".cat_{{ c.cid }}"
+            >
+              {{ c.ctitle }}
+            </button>
+            {% endfor %}
+          </div>
+
+          <div class="flex-w flex-c-m m-tb-10">
+            <div
+              class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter"
+            >
+              <i
+                class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"
+              ></i>
+              <i
+                class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"
+              ></i>
+              Filter
+            </div>
+          </div>
+
+          <div class="dis-none panel-filter w-full p-t-10">
+            <div
+              class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm"
+              style="
+                border-radius: 12px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+              "
+            >
+              <div class="filter-col1 p-r-15 p-b-27">
+                <div class="mtext-102 cl2 p-b-15">
+                  <i class="fa fa-sort m-r-6"></i> Sắp xếp theo
+                </div>
+                <ul>
+                  <li class="p-b-6">
+                    <a
+                      href="#"
+                      class="filter-link stext-106 trans-04 sort-btn filter-link-active"
+                      data-sort="default"
+                      data-url="{% url 'core:filter-products' %}"
+                      >Mặc định</a
+                    >
+                  </li>
+                  <li class="p-b-6">
+                    <a
+                      href="#"
+                      class="filter-link stext-106 trans-04 sort-btn"
+                      data-sort="newest"
+                      data-url="{% url 'core:filter-products' %}"
+                      >Mới nhất</a
+                    >
+                  </li>
+                  <li class="p-b-6">
+                    <a
+                      href="#"
+                      class="filter-link stext-106 trans-04 sort-btn"
+                      data-sort="price_asc"
+                      data-url="{% url 'core:filter-products' %}"
+                      >Giá: Thấp đến Cao</a
+                    >
+                  </li>
+                  <li class="p-b-6">
+                    <a
+                      href="#"
+                      class="filter-link stext-106 trans-04 sort-btn"
+                      data-sort="price_desc"
+                      data-url="{% url 'core:filter-products' %}"
+                      >Giá: Cao đến Thấp</a
+                    >
+                  </li>
+                </ul>
+              </div>
+
+              <div class="filter-col2 p-r-15 p-b-27" style="min-width: 250px">
+                <div class="mtext-102 cl2 p-b-15">
+                  <i class="fa fa-tag m-r-6"></i> Khoảng giá (VND)
+                </div>
+                <div class="p-t-10 p-r-20">
+                  <input
+                    type="range"
+                    id="range"
+                    min="{{ min_max_price.price__min }}"
+                    max="{{ min_max_price.price__max }}"
+                    value="{{ min_max_price.price__max }}"
+                    class="custom-range mb-3"
+                    oninput="updatePriceValue(this.value)"
+                  />
+
+                  <div class="flex-w flex-sb-m">
+                    <div class="p-b-10">
+                      <span class="stext-102 cl2">Giá tối đa:</span>
+                      <div
+                        class="stext-102 cl1 font-weight-bold"
+                        style="font-size: 18px"
+                      >
+                        <span id="price_val"
+                          >{{ min_max_price.price__max|intcomma }}</span
+                        >
+                        Đ
+                      </div>
+                    </div>
+
+                    <input
+                      type="number"
+                      id="max_price"
+                      min="{{ min_max_price.price__min }}"
+                      max="{{ min_max_price.price__max }}"
+                      value="{{ min_max_price.price__max }}"
+                      class="dis-none"
+                    />
+
+                    <button
+                      class="flex-c-m stext-101 cl0 size-103 bg3 bor1 hov-btn3 p-lr-15 trans-04"
+                      id="price-filter-btn"
+                      data-url="{% url 'core:filter-products' %}"
+                    >
+                      Áp dụng
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row isotope-grid" id="filter-products">
+          {% for p in searched_product %}
+          <div
+            class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item cat_{{ p.category.cid }}"
+          >
+            <div class="block2">
+              <div class="block2-pic hov-img0 pos-relative">
+                <img src="{{ p.image.url }}" alt="{{ p.title }}" />
+
+                {% if p.old_price > p.price %}
+                <div
+                  class="block2-label-new stext-103 p-t-4 p-b-4 p-l-10 p-r-10 bg-danger color-white"
+                  style="background-color: #e65540"
+                >
+                  -{{ p.get_percentage|floatformat:0 }}%
+                </div>
+                {% else %}
+                <div
+                  class="block2-label-new stext-103 p-t-4 p-b-4 p-l-10 p-r-10"
+                >
+                  New
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="block2-txt flex-w flex-t p-t-14">
+                <div class="block2-txt-child1 flex-col-l">
+                  <a
+                    href="{% url 'core:product-details' p.pid %}"
+                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 font-weight-bold"
+                  >
+                    {{ p.title }}
+                  </a>
+
+                  <div class="flex-w flex-m">
+                    <span
+                      class="stext-105 cl1"
+                      style="font-weight: 600; font-size: 16px"
+                    >
+                      {{ p.price|intcomma }} <small>VND</small>
+                    </span>
+
+                    {% if p.old_price > p.price %}
+                    <span
+                      class="stext-109 cl3 m-l-10"
+                      style="text-decoration: line-through; font-size: 13px"
+                    >
+                      {{ p.old_price|intcomma }}
+                    </span>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="block2-txt-child2 flex-r p-t-3">
+                  <a
+                    href="#"
+                    class="btn-addwish-b2 dis-block pos-relative add-to-wishlist {% if p.id in wishlist_ids %}in-wishlist{% endif %}"
+                    data-product-item="{{ p.id }}"
+                    data-url="{% url 'core:add-to-wishlist' %}"
+                  >
+                    <i class="zmdi zmdi-favorite-outline heart-icon"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-12 text-center p-t-50">
+            <h4 class="stext-101 cl2">
+              Không tìm thấy sản phẩm nào phù hợp với "{{ query }}"
+            </h4>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Chatbot -->
+    {% include 'partials/chatbot.html' %}
+
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+
+    <div class="btn-back-to-top" id="myBtn">
+      <span class="symbol-btn-back-to-top">
+        <i class="zmdi zmdi-chevron-up"></i>
+      </span>
+    </div>
+
+    <style>
+      .heart-icon {
+        font-size: 24px;
+        color: #000000; /* mặc định tim trống */
+        transition: color 0.3s ease;
+      }
+
+      .add-to-wishlist.in-wishlist .heart-icon {
+        color: #ee4d2d; /* tim đỏ nếu đã có trong wishlist */
+      }
+    </style>
+
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+    <script>
+      $(".js-select2").each(function () {
+        $(this).select2({
+          minimumResultsForSearch: 20,
+          dropdownParent: $(this).next(".dropDownSelect2"),
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/slick/slick.min.js' %}"></script>
+    <script src="{% static 'js/slick-custom.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/parallax100/parallax100.js' %}"></script>
+    <script>
+      $(".parallax100").parallax100();
+    </script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+    <script>
+      $(".gallery-lb").each(function () {
+        // the containers for all your galleries
+        $(this).magnificPopup({
+          delegate: "a", // the selector for gallery item
+          type: "image",
+          gallery: {
+            enabled: true,
+          },
+          mainClass: "mfp-fade",
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/isotope/isotope.pkgd.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+    <script>
+      $(".js-addwish-b2, .js-addwish-detail").on("click", function (e) {
+        e.preventDefault();
+      });
+
+      $(".js-addwish-b2").each(function () {
+        var nameProduct = $(this).parent().parent().find(".js-name-b2").html();
+        $(this).on("click", function () {
+          swal(nameProduct, "is added to wishlist !", "success");
+
+          $(this).addClass("js-addedwish-b2");
+          $(this).off("click");
+        });
+      });
+
+      $(".js-addwish-detail").each(function () {
+        var nameProduct = $(this)
+          .parent()
+          .parent()
+          .parent()
+          .find(".js-name-detail")
+          .html();
+
+        $(this).on("click", function () {
+          swal(nameProduct, "is added to wishlist !", "success");
+
+          $(this).addClass("js-addedwish-detail");
+          $(this).off("click");
+        });
+      });
+
+      /*---------------------------------------------*/
+
+      $(".js-addcart-detail").each(function () {
+        var nameProduct = $(this)
+          .parent()
+          .parent()
+          .parent()
+          .parent()
+          .find(".js-name-detail")
+          .html();
+        $(this).on("click", function () {
+          swal(nameProduct, "is added to cart !", "success");
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script>
+      $(".js-pscroll").each(function () {
+        $(this).css("position", "relative");
+        $(this).css("overflow", "hidden");
+        var ps = new PerfectScrollbar(this, {
+          wheelSpeed: 1,
+          scrollingThreshold: 1000,
+          wheelPropagation: false,
+        });
+
+        $(window).on("resize", function () {
+          ps.update();
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/main.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/dropdown.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/price_slider.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/filter_products.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/sort_products.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/add_to_wishlist.js' %}"></script>
+  </body>
+</html>

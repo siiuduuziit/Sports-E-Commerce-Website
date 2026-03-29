@@ -1,0 +1,28 @@
+.table-shopping-cart .table_row:hover {
+  background-color: #f9f9f9;
+}
+.how-itemcart1 {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.btn-update-cart,
+.btn-delete-cart {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.btn-delete-cart:hover i,
+.btn-delete-cart:hover p {
+  color: #333 !important;
+}
+.shadow-inner {
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+.fw-bold {
+  font-weight: bold;
+}
+.bor12 {
+  border-bottom: 1px dashed #d9d9d9;
+}

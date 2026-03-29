@@ -1,0 +1,89 @@
+/* Màu chủ đạo Shopee */
+:root {
+    --main-color: #ee4d2d;
+    --sub-color: #fef6f5;
+}
+
+/* 1. Trang trí phần Giá */
+.mtext-106.cl2 {
+    color: var(--main-color) !important;
+    font-size: 30px;
+    font-weight: bold;
+    background: var(--sub-color);
+    padding: 15px;
+    display: inline-block;
+    width: 100%;
+    border-radius: 4px;
+}
+
+/* 2. Trang trí Nút Add to Cart */
+.js-addcart-detail {
+    background-color: var(--main-color) !important;
+    border: none !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    height: 55px !important;
+    transition: all 0.3s;
+}
+
+.js-addcart-detail:hover {
+    background-color: #d73211 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(238, 77, 45, 0.3);
+}
+
+/* 3. Trang trí phần Tab (Description/Reviews) */
+.nav-tabs .nav-link.active {
+    color: var(--main-color) !important;
+    border-bottom: 3px solid var(--main-color) !important;
+    font-weight: bold;
+}
+
+/* 4. Trang trí Review List */
+.review-list .flex-w {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.wrap-pic-s.size-109 {
+    border-radius: 50%; /* Avatar tròn */
+    border: 1px solid #ddd;
+}
+
+.cl11 {
+    color: #ffce3d !important; /* Màu sao vàng chuẩn */
+}
+
+/* 5. Trang trí Related Products (Khóa khung ảnh giống Index) */
+.sec-relate-product .block2-pic {
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sec-relate-product .block2-pic img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.wrap-rating .stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+.wrap-rating input { display: none; }
+.wrap-rating label {
+    font-size: 20px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.wrap-rating input:checked ~ label,
+.wrap-rating label:hover,
+.wrap-rating label:hover ~ label {
+    color: #f1c40f;
+}

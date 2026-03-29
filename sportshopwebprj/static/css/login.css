@@ -1,0 +1,93 @@
+body {
+  background-color: #f7f7f7;
+}
+.login-container {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  background: #fff;
+}
+
+.login-header {
+  background-color: #717fe0;
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+}
+
+.login-body {
+  padding: 40px;
+}
+
+.input-group-custom {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.input-group-custom i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #717fe0;
+  font-size: 18px;
+}
+
+.input-group-custom input {
+  width: 100%;
+  padding: 12px 20px 12px 45px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.input-group-custom input:focus {
+  border-color: #717fe0;
+  box-shadow: 0 0 0 3px rgba(113, 127, 224, 0.1);
+}
+
+.btn-login {
+  background-color: #717fe0;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  padding: 12px;
+  width: 100%;
+  transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-login:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.login-footer-text {
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.login-footer-text a {
+  color: #717fe0;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Checkbox custom */
+.form-check-input:checked {
+  background-color: #717fe0;
+  border-color: #717fe0;
+}

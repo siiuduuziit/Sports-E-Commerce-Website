@@ -1,0 +1,419 @@
+{% load static %} {% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Account Details</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/icons/favicon.png' %}"
+    />
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'vendor/animate/animate.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/animsition/css/animsition.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/select2/select2.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/daterangepicker/daterangepicker.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'vendor/slick/slick.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'css/dropdown.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/util.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account_details.css' %}" />
+    <!--===============================================================================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!--===============================================================================================-->
+  </head>
+  <body class="animsition">
+    <!-- Header -->
+    {% include 'partials/header_products.html' %}
+
+    <!-- breadcrumb -->
+    <div class="container">
+      <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="{% url 'core:index' %}" class="stext-109 cl8 hov-cl1 trans-04">
+          Home
+          <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a
+          href="{% url 'core:account-details' %}"
+          class="stext-109 cl8 hov-cl1 trans-04"
+        >
+          Account Details
+          <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4"> Order Details </span>
+      </div>
+    </div>
+
+    <section
+      class="section-content padding-y bg-light p-t-40 p-b-100"
+      style="min-height: 80vh"
+    >
+      <div class="container">
+        <div class="row">
+          <aside class="col-md-3">
+            <div class="card p-2 border-0 shadow-sm">
+              <ul class="list-group list-group-flush shadow-none">
+                <a
+                  href="{% url 'core:account-details' %}"
+                  class="list-group-item"
+                >
+                  <i class="fa fa-dashboard m-r-10"></i> Dashboard
+                </a>
+                <a
+                  href="{% url 'core:account-details' %}"
+                  class="list-group-item active"
+                >
+                  <i class="fa fa-shopping-cart m-r-10"></i> Lịch sử đơn hàng
+                </a>
+                <a
+                  href="{% url 'core:account-details' %}"
+                  class="list-group-item"
+                >
+                  <i class="fa fa-map-marker m-r-10"></i> Sổ địa chỉ
+                </a>
+                <a
+                  href="{% url 'core:account-details' %}"
+                  class="list-group-item"
+                >
+                  <i class="fa fa-heart m-r-10"></i> Danh sách yêu thích
+                </a>
+                <a
+                  href="{% url 'core:account-details' %}"
+                  class="list-group-item"
+                >
+                  <i class="fa fa-user m-r-10"></i> Thông tin tài khoản
+                </a>
+              </ul>
+              <hr />
+              <a
+                class="btn btn-outline-danger btn-block m-t-10"
+                href="{% url 'userauths:logout_view' %}"
+              >
+                <i class="fa fa-power-off"></i> Đăng xuất
+              </a>
+            </div>
+          </aside>
+
+          <main class="col-md-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="mtext-105">Chi tiết đơn hàng #{{ order.id }}</h4>
+              <a
+                href="{% url 'core:account-details' %}"
+                class="stext-101 cl2 hov-cl1 trans-04"
+              >
+                <i class="fa fa-arrow-left"></i> Quay lại
+              </a>
+            </div>
+
+            <article class="card mb-4 border-0 shadow-sm">
+              <div class="card-body p-4">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h6 class="text-muted mb-1 stext-102">Ngày đặt hàng:</h6>
+                    <p class="stext-101 cl2">
+                        {{ order.order_date|date:'d/m/Y H:i' }}
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <h6 class="text-muted mb-1 stext-102">Trạng thái:</h6>
+                    {% if order.product_status == 'done' %}
+                    <span
+                      class="badge badge-pill p-lr-15 p-tb-5"
+                      style="background: #00ff22; color: #000000"
+                    >
+                      Hoàn thành
+                    </span>
+                    {% elif order.product_status == 'canceled' %}
+                    <span
+                      class="badge badge-pill p-lr-15 p-tb-5"
+                      style="background: #ff0000; color: #ffffff"
+                    >
+                      Đã hủy
+                    </span>
+                    {% elif order.product_status == 'returned' %}
+                    <span
+                      class="badge badge-pill p-lr-15 p-tb-5"
+                      style="background: #ff0000; color: #ffffff"
+                    >
+                      Đã trả hàng
+                    </span>
+                    {% else %}
+                    <span
+                      class="badge badge-pill p-lr-15 p-tb-5"
+                      style="background: #f6ff00; color: #000000"
+                    >
+                      Đã đặt hàng
+                    </span>
+                    {% endif %}
+                  </div>
+                  <div class="col-md-4 text-md-right">
+                    <h6 class="text-muted mb-1 stext-102">Tổng thanh toán:</h6>
+                    <p
+                      class="stext-101 cl1 font-weight-bold"
+                      style="font-size: 20px"
+                    >
+                      {{ order.price|floatformat:0|intcomma }} VND
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <div class="card border-0 shadow-sm mb-4">
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                      <tr class="stext-102 cl2">
+                        <th class="p-l-20">Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th class="text-right p-r-20">Tổng</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in order_items %}
+                      <tr class="stext-102 cl6">
+                        <td class="p-l-20 py-3">
+                          <div class="d-flex align-items-center">
+                            <img
+                              src="{{ item.image }}"
+                              alt="img"
+                              class="m-r-15"
+                              style="
+                                width: 60px;
+                                height: 60px;
+                                object-fit: cover;
+                                border-radius: 8px;
+                              "
+                            />
+                            <div>
+                              <span class="cl2 font-weight-bold"
+                                >{{ item.item }}</span
+                              >
+                              <br />
+                              <small class="text-muted"
+                                >SKU: {{ item.id }}</small
+                              >
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          {{ item.price|floatformat:0|intcomma }} VND
+                        </td>
+                        <td class="align-middle">x {{ item.qty }}</td>
+                        <td class="align-middle text-right p-r-20 cl1">
+                          {{ item.total|floatformat:0|intcomma }} VND
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <article class="card border-0 shadow-sm h-100">
+                  <header class="card-header bg-white py-3">
+                    <h6 class="stext-101 cl2 mb-0">
+                      <i class="fa fa-map-marker m-r-5 text-primary"></i> Địa
+                      chỉ giao hàng
+                    </h6>
+                  </header>
+                  <div class="card-body">
+                    <p class="stext-102 cl6">
+                      <strong class="cl2">{{ order.full_name }}</strong><br />
+                      {{ order.address_line }}<br />
+                      SĐT: {{ order.phone_number }}<br />
+                      Email: {{ order.email }}
+                    </p>
+                  </div>
+                </article>
+              </div>
+              <div class="col-md-6">
+                <article class="card border-0 shadow-sm h-100">
+                  <header class="card-header bg-white py-3">
+                    <h6 class="stext-101 cl2 mb-0">
+                      <i class="fa fa-credit-card m-r-5 text-success"></i>
+                      Phương thức thanh toán
+                    </h6>
+                  </header>
+                  <div class="card-body">
+                    <p class="stext-102 cl6">
+                      Loại: <strong>{{ order.payment_method }}</strong><br />
+                      Trạng thái thanh toán: {% if order.paid_status %}
+                      <span class="text-success">Đã thanh toán</span>
+                      {% else %}
+                      <span class="text-danger">Chưa thanh toán</span>
+                      {% endif %}
+                    </p>
+                    <div class="bg-light p-3 bor-10">
+                      <div
+                        class="d-flex justify-content-between stext-102 mb-1"
+                      >
+                        <span>Tạm tính:</span>
+                        <span
+                          >{{ order.price|floatformat:0|intcomma }} VND</span
+                        >
+                      </div>
+                      <div
+                        class="d-flex justify-content-between stext-102 text-danger"
+                      >
+                        <span>Giảm giá:</span>
+                        <span
+                          >-{{ order.saved|floatformat:0|intcomma }} VND</span
+                        >
+                      </div>
+                      <hr />
+                      <div class="d-flex justify-content-between stext-101 cl2">
+                        <span>Thành tiền:</span>
+                        <span class="cl1"
+                          >{{ order.price|floatformat:0|intcomma }} VND</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= SECTION CONTENT END ========================= -->
+
+    <!-- Chatbot -->
+    {% include 'partials/chatbot.html' %}
+
+    <!-- Footer -->
+    {% include 'partials/footer.html' %}
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+    <script src="{% static 'vendor/slick/slick.min.js' %}"></script>
+    <script src="{% static 'js/slick-custom.js' %}"></script>
+    <script src="{% static 'vendor/parallax100/parallax100.js' %}"></script>
+    <script src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/dropdown.js' %}"></script>
+
+    <script>
+      // Sidebar select2
+      $(".js-select2").each(function () {
+        $(this).select2({
+          minimumResultsForSearch: 20,
+          dropdownParent: $(this).next(".dropDownSelect2"),
+        });
+      });
+
+      // Magnific Popup gallery
+      $(".gallery-lb").each(function () {
+        $(this).magnificPopup({
+          delegate: "a",
+          type: "image",
+          gallery: { enabled: true },
+          mainClass: "mfp-fade",
+        });
+      });
+
+      // Perfect Scrollbar
+      $(".js-pscroll").each(function () {
+        $(this).css({ position: "relative", overflow: "hidden" });
+        var ps = new PerfectScrollbar(this, {
+          wheelSpeed: 1,
+          scrollingThreshold: 1000,
+          wheelPropagation: false,
+        });
+        $(window).on("resize", function () {
+          ps.update();
+        });
+      });
+
+      // Parallax
+      $(".parallax100").parallax100();
+    </script>
+
+    <script>
+      // Tab switching for sidebar
+      const items = document.querySelectorAll(".list-group-item[data-target]");
+      const sections = document.querySelectorAll(".tab-section");
+
+      items.forEach((item) => {
+        item.addEventListener("click", function () {
+          // Remove active class
+          items.forEach((i) => i.classList.remove("active"));
+          this.classList.add("active");
+
+          // Hide all sections
+          sections.forEach((sec) => (sec.style.display = "none"));
+
+          // Show selected section
+          const target = this.getAttribute("data-target");
+          document.querySelector(target).style.display = "block";
+        });
+      });
+
+      // Default active tab
+      document.querySelector("#tab-orders").style.display = "block";
+    </script>
+  </body>
+</html>

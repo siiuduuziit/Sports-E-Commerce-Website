@@ -1,0 +1,219 @@
+{% load static %} {% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Liên Hệ | Coza Store</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'images/icons/favicon.png' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+
+    <style>
+      /* Tinh chỉnh giao diện */
+      .contact-info-card {
+        transition: all 0.3s ease;
+        padding: 20px;
+        border-radius: 15px;
+      }
+      .contact-info-card:hover {
+        background-color: #f8f9fa;
+      }
+      .icon-box {
+        color: #717fe0;
+        font-size: 24px;
+        width: 50px;
+        text-align: center;
+      }
+      .bor8 {
+        border-radius: 10px !important;
+        overflow: hidden;
+      }
+      .hov-btn-custom:hover {
+        background-color: #333 !important;
+        color: white !important;
+      }
+      /* Làm mượt map */
+      .map-container {
+        filter: grayscale(10%);
+        border-top: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body class="animsition">
+    {% include 'partials/header_products.html' %}
+
+    <section
+      class="bg-img1 txt-center p-lr-15 p-tb-92"
+      style="background-image: url(&quot;{% static 'images/bg-01.jpg' %}&quot;);"
+    >
+      <h2 class="ltext-105 cl0 txt-center shadow-sm">Liên Hệ</h2>
+    </section>
+
+    <section class="bg0 p-t-104 p-b-116">
+      <div class="container">
+        <div class="flex-w flex-tr">
+          <div
+            class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md shadow-sm bg-white"
+            style="border-radius: 20px"
+          >
+            <form
+              id="contact-form"
+              method="POST"
+              data-url="{% url 'core:ajax-contact-us' %}"
+            >
+              {% csrf_token %}
+              <h4 class="mtext-105 cl2 txt-center p-b-30">Gửi Tin Nhắn</h4>
+
+              <div class="bor8 m-b-20 how-pos4-parent">
+                <input
+                  class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email của bạn"
+                  required
+                />
+                <img
+                  class="how-pos4 pointer-none"
+                  src="{% static 'images/icons/icon-email.png' %}"
+                  alt="ICON"
+                />
+              </div>
+
+              <div class="bor8 m-b-20">
+                <input
+                  class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30"
+                  type="text"
+                  name="full_name"
+                  id="full_name"
+                  placeholder="Họ và tên"
+                  required
+                />
+              </div>
+
+              <div class="bor8 m-b-20">
+                <input
+                  class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30"
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  placeholder="Tiêu đề"
+                  required
+                />
+              </div>
+
+              <div class="bor8 m-b-30">
+                <textarea
+                  class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25"
+                  name="msg"
+                  id="message"
+                  placeholder="Chúng tôi có thể giúp gì cho bạn?"
+                ></textarea>
+              </div>
+
+              <button
+                class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer hov-btn-custom"
+              >
+                Gửi phản hồi
+              </button>
+            </form>
+          </div>
+
+          <div
+            class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md"
+          >
+            <div class="flex-w w-full p-b-42 contact-info-card">
+              <span class="icon-box m-r-20">
+                <span class="lnr lnr-map-marker"></span>
+              </span>
+              <div class="size-212 p-t-2">
+                <span class="mtext-110 cl2">Địa Chỉ</span>
+                <p class="stext-115 cl6 size-213 p-t-18">
+                  31/1A Nguyễn Bỉnh Khiêm, Phường Đa Kao, Quận 1, TP. Hồ Chí
+                  Minh
+                </p>
+              </div>
+            </div>
+
+            <div class="flex-w w-full p-b-42 contact-info-card">
+              <span class="icon-box m-r-20">
+                <span class="lnr lnr-phone-handset"></span>
+              </span>
+              <div class="size-212 p-t-2">
+                <span class="mtext-110 cl2">Đường Dây Nóng</span>
+                <p class="stext-115 cl1 size-213 p-t-18">0368 021 584</p>
+              </div>
+            </div>
+
+            <div class="flex-w w-full contact-info-card">
+              <span class="icon-box m-r-20">
+                <span class="lnr lnr-envelope"></span>
+              </span>
+              <div class="size-212 p-t-2">
+                <span class="mtext-110 cl2">Email Hỗ Trợ</span>
+                <p class="stext-115 cl1 size-213 p-t-18">
+                  billnguyen234@gmail.com
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.263844686153!2d106.70208177573615!3d10.79032585892187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528b4f69324d3%3A0xc3f94295982e5644!2zMzEvMUEgTmd1eeG7hW4gQuG7i25oIEtoacOqbSwgxJBhIEthbywgUXXhuq1uIDEsIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1715800000000!5m2!1svi!2s"
+        width="100%"
+        height="450"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      >
+      </iframe>
+    </div>
+
+    {% include 'partials/footer.html' %}
+
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE"></script>
+    <script src="{% static 'js/map-custom.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/contact_us.js' %}"></script>
+  </body>
+</html>

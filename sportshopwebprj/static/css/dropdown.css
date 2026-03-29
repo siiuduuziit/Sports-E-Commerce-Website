@@ -1,0 +1,49 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-toggle {
+  cursor: pointer;
+  color: #555;
+  text-decoration: none;
+} /* Mặc định ẩn dropdown */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index: 9999;
+  list-style: none;
+  padding: 6px 0;
+  margin-top: 6px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.25s ease;
+} /* Khi active (bằng JS) thì hiện ra */
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+.dropdown-menu .dropdown-item {
+  color: #333;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.2s;
+}
+.dropdown-menu .dropdown-item:hover {
+  background-color: #f2f2f2;
+} /* Fix dropdown bị cắt bởi header */
+.container-menu-desktop,
+.content-topbar {
+  overflow: visible !important;
+  z-index: 999 !important;
+} /* Fix bị trùng 2 dấu mũi tên ▼ */
+.dropdown-toggle::after {
+  content: none !important;
+}
